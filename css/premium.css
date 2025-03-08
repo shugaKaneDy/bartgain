@@ -1,0 +1,19 @@
+/* Ribbon Style */
+.ribbon {
+  position: absolute;
+  top: 40px;
+  left: -5px;
+  background-color: #28a745; /* Green for success */
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.position-relative {
+  position: relative;
+}

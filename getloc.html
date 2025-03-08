@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="loc">Click me</button>
+
+  <pre class="my-pre">
+
+  </pre>
+
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="js/sweetalert2/swal.js"></script>
+
+  <script>
+
+    $(".loc").on("click", function() {
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var lat = position.coords.latitude;  // Get latitude
+          var lon = position.coords.longitude; // Get longitude
+
+          $.ajax({
+            method: "GET",
+            url: `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}`,
+            success: function(res) {
+              console.log(res);
+              $(".my-pre").html(res);
+              $(".my-pre").html(JSON.stringify(res, null, 2));
+            }
+          });
+
+        }, function(error) {
+          // Handle different error cases
+          if (error.code === error.PERMISSION_DENIED) {
+            // User denied geolocation
+            Swal.fire({
+              title: "Permission Denied",
+              text: "Please allow access to location services to proceed.",
+              icon: "warning",
+            });
+          } else {
+            // Other errors (position unavailable, timeout, etc.)
+            Swal.fire({
+              title: "Error",
+              text: "Error getting location: " + error.message,
+              icon: "error",
+            });
+          }
+          console.log("Error getting location: " + error.message);
+        });
+      } else {
+        // Handle browsers that don't support geolocation
+        Swal.fire({
+          title: "Geolocation Not Supported",
+          text: "Your browser does not support geolocation. Please use a different browser.",
+          icon: "error",
+        });
+        console.log("Geolocation is not supported by this browser.");
+      }
+    });
+
+
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+body {
+  padding-top: 100px;
+  font-family: Poppins;
+}
+.text-normal {
+  font-size: 1em;
+}
+.text-sm {
+  font-size: 0.825em;
+}
+.text-xs {
+  font-size: 0.75em;
+}
+
+
+@media (max-width: 576px) {
+  body {
+    padding-top: 80px;
+  }
+  .text-normal {
+    font-size: 0.825em;
+  }
+  .text-sm {
+    font-size: 0.75em;
+  }
+  .text-xs {
+    font-size: 0.625em;
+  }
+  
+}

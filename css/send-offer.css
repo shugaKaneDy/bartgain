@@ -1,0 +1,47 @@
+.my-img-container-height {
+
+  width: 100%;
+  height: 140px;
+}
+.my-img-container-height img{
+
+  /* width: 100%; */
+  height: 100%;
+}
+.my-img-container-height video{
+
+  /* width: 100%; */
+  height: 100%;
+}
+
+/* Define custom focus ring color */
+:root {
+  --custom-focus-ring-color: rgba(24, 135, 84, 0.25); /* Color: #188754 with transparency */
+}
+
+/* Accordion button when active (expanded) */
+.accordion-button:not(.collapsed) {
+  background-color: #188754; /* Base green color */
+  color: white; /* White text */
+  border-color: #188754; /* Same green border */
+}
+
+/* Default appearance of the accordion button */
+.accordion-button {
+  background-color: white; /* White background when collapsed */
+  color: #188754; /* Green text when collapsed */
+  border-color: #188754; /* Green border when collapsed */
+}
+
+/* Focus state using the custom focus ring color */
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem var(--custom-focus-ring-color); /* Use custom focus ring color */
+  border-color: #188754; /* Green border */
+}
+
+/* Hover state */
+.accordion-button:hover {
+  background-color: #145f40; /* Slightly darker green on hover */
+  color: white; /* White text on hover */
+  border-color: #145f40; /* Darker green border */
+}

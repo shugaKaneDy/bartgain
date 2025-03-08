@@ -1,0 +1,108 @@
+.my-logo {
+  width: 35px;
+  height: 35px;
+}
+.my-text-logo {
+  font-weight: 800 !important;
+  font-size: 35px;
+}
+
+.link-text-success-active {
+  color: #188754;
+  border-bottom: #188754 2px solid;
+}
+
+.link-nav-hover:hover {
+  /* color: #157247; */
+  background-color: #e8ecef;
+}
+
+.my-profile {
+  width: 40px;
+  height: 40px;
+}
+
+.add-item {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+
+.my-burger:hover {
+  background-color: #e8ecef !important;
+}
+
+.image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  object-fit: cover;
+  padding: 0;              /* Remove any padding */
+  margin: 0;               /* Remove any margin */
+  display: block;
+  max-height: 255px !important;
+}
+
+.forPopup {
+  cursor: pointer;
+}
+
+.custom-gap > [class^="col"] {
+  margin-right: 10px; /* Adjust as needed */
+  margin-bottom: 10px; /* Optional for vertical spacing */
+}
+
+.my-img-container-height {
+
+  width: 100%;
+  height: 450px;
+}
+.my-img-container-height img{
+
+  /* width: 100%; */
+  height: 100%;
+}
+.my-img-container-height video{
+
+  /* width: 100%; */
+  height: 100%;
+}
+
+.content-container {
+  height: 450px;
+  overflow-y: auto;
+}
+
+/* Ribbon Style */
+.ribbon {
+  position: absolute;
+  top: 40px;
+  left: -5px;
+  background-color: #28a745; /* Green for success */
+  color: white;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+
+
+@media (max-width: 576px) {
+  .my-img-container-height {
+    height: 250px;
+  }
+  .content-container {
+    height: auto;
+    overflow-y: hidden;
+  }
+}

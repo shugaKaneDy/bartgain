@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Detection and Recognition</title>
+</head>
+<body>
+    <input type="file" id="imageInput" accept="image/*">
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div id="message"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="face-api.min.js"></script>
+
+    <script>
+        $(document).ready(async function () {
+            await faceapi.nets.tinyFaceDetector.loadFromUri('./models');
+            await faceapi.nets.faceLandmark68Net.loadFromUri('./models');
+            await faceapi.nets.faceRecognitionNet.loadFromUri('./models');
+
+            $('#imageInput').change(async function () {
+                const file = this.files[0];
+                if (!file) return;
+
+                const img = await faceapi.bufferToImage(file);
+                const canvas = $('#canvas')[0];
+                const displaySize = { width: img.width, height: img.height };
+                faceapi.matchDimensions(canvas, displaySize);
+                canvas.getContext('2d').drawImage(img, 0, 0, displaySize.width, displaySize.height);
+                
+                const detections = await faceapi.detectAllFaces(img, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceDescriptors();
+
+                if (detections.length === 0) {
+                    $('#message').text('No face detected. Please upload an image with a face.');
+                    return;
+                } else {
+                    $('#message').text('Face detected. Proceeding to recognition...');
+                }
+
+                // Replace this with your recognition logic
+                const recognized = await recognizeFace(detections);
+
+                if (!recognized) {
+                    $('#message').text('Face not recognized. Please try again.');
+                } else {
+                    $('#message').text('Face recognized! Prepare to capture...');
+                    await captureImage();
+                }
+            });
+        });
+
+        async function recognizeFace(detections) {
+            // Placeholder logic for face recognition
+            // Simulate recognition success 40% of the time
+            return Math.random() < 0.4; 
+        }
+
+        async function captureImage() {
+            $('#message').text('Capturing image in 3 seconds. Please maintain a neutral face.');
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            $('#message').text('Image captured!');
+            // Add image capturing logic here
+        }
+    </script>
+</body>
+</html>

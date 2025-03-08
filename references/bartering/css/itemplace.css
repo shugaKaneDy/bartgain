@@ -1,0 +1,46 @@
+.div-img-lg {
+  max-width: 500px;
+  height: 300px;
+}
+.img-lg {
+  max-width: 480px;
+  max-height: 280px;
+}
+.div-img-md {
+  max-width: 450px;
+  height: 220px;
+}
+.img-md {
+  max-width: 330px;
+  max-height: 200px;
+}
+
+/* Target the search box */
+.dataTables_filter {
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.dataTables_filter label {
+  font-weight: bold; /* Make the label bold */
+  font-size: 14px; /* Adjust the font size */
+}
+.dataTables_filter input {
+  border: 1px solid #ccc; /* Add border */
+  padding: 5px; /* Add padding */
+  font-size: 14px; /* Adjust the font size */
+  width: 50px; /* Set a fixed width */
+}
+
+@media (max-width: 576px) {
+  .div-img-lg, .div-img-md {
+    max-width: 300px;
+    height: 250px;
+  }
+  .img-lg, .img-md {
+    max-width: 270px;
+    max-height: 200px;
+  }
+  .dataTables_filter label {
+    font-size: 10px; /* Adjust the font size */
+  }
+}

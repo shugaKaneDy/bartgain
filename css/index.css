@@ -1,0 +1,12 @@
+.my-logo {
+  width: 35px;
+  height: 35px;
+}
+.my-text-logo {
+  font-weight: 800 !important;
+  font-size: 35px;
+}
+
+.my-main-header {
+  height: 450px !important;
+}

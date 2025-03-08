@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Camera Example</title>
+    <style>
+        #videoElement {
+            width: 100%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <video id="videoElement" autoplay></video>
+    <canvas id="canvasElement" style="display:none;"></canvas>
+    <button onclick="captureImage()">Capture Image</button>
+    <button onclick="switchCamera()">Switch Camera</button>
+    <button onclick="startCamera()">Start Camera</button>
+    <button onclick="stopCamera()">Stop Camera</button>
+
+    <script>
+        let video = document.getElementById('videoElement');
+        const canvas = document.getElementById('canvasElement');
+        let stream = null;
+
+        // Function to start the camera stream
+        function startCamera() {
+            const constraints = {
+                video: true
+            };
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function (mediaStream) {
+                    stream = mediaStream;
+                    video.srcObject = mediaStream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing camera:', error);
+                });
+        }
+
+        // Function to stop the camera stream
+        function stopCamera() {
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach(track => track.stop());
+                video.srcObject = null;
+                stream = null;
+            }
+        }
+
+        // Function to switch between front and back cameras (if available)
+        function switchCamera() {
+            const constraints = {
+                video: { facingMode: (video.facingMode === 'user') ? 'environment' : 'user' }
+            };
+
+            stopCamera();
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function (mediaStream) {
+                    stream = mediaStream;
+                    video.srcObject = mediaStream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing camera:', error);
+                });
+        }
+
+        // Function to capture image from camera stream
+        function captureImage() {
+            if (!stream) {
+                console.error('Camera stream not started.');
+                return;
+            }
+
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Example: Display the captured image on the page
+            const capturedImage = new Image();
+            capturedImage.src = canvas.toDataURL('image/png');
+            document.body.appendChild(capturedImage);
+
+            // Example: Upload the captured image to a server via AJAX
+            // Replace with your server-side upload code
+            /*
+            const imageData = canvas.toDataURL('image/jpeg');
+            fetch('/uploadImage', {
+                method: 'POST',
+                body: JSON.stringify({ image: imageData }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log('Image uploaded:', data))
+            .catch(error => console.error('Error uploading image:', error));
+            */
+        }
+    </script>
+</body>
+</html>

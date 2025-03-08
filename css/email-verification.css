@@ -1,0 +1,40 @@
+body {
+  height: 100vh;
+}
+.myVerification {
+  width: 35%;
+}
+.my-logo {
+  width: 35px;
+  height: 35px;
+}
+.my-text-logo {
+  font-weight: 800 !important;
+  font-size: 35px;
+}
+.my-small-text {
+  font-size: 0.75rem;
+}
+
+.my-input:focus {
+  outline: none; /* Remove the default blue outline */
+  box-shadow: none; /* Remove the shadow around the input */
+  border-color: #188754; /* Set the border color to Bootstrap's 'success' green */
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  z-index: 1050; /* Ensure it is on top of other content */
+}
+
+
+@media (max-width: 576px) {
+  .myVerification {
+    width: 100%;
+  }
+}

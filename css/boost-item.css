@@ -1,0 +1,9 @@
+.image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  object-fit: cover;
+  padding: 0;              /* Remove any padding */
+  margin: 0;               /* Remove any margin */
+  display: block;
+  max-height: 255px !important;
+}

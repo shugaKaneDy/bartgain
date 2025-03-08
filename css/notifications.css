@@ -1,0 +1,13 @@
+.notificationInfo:hover {
+  background-color: #f8f9fb;
+  cursor: pointer;
+}
+.for-text-truncate {
+  max-width: 600px;
+}
+
+@media (max-width: 576px) {
+  .for-text-truncate {
+    max-width: 250px;
+  }
+}

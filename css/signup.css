@@ -1,0 +1,57 @@
+body {
+  /* background: linear-gradient(180deg, #ffffff 40%, #188754 100%); */
+  min-height: 100vh;
+}
+
+.my-logo {
+  width: 35px;
+  height: 35px;
+}
+.my-text-logo {
+  font-weight: 800 !important;
+  font-size: 35px;
+}
+
+.bg-circle-1 {
+  position: fixed;
+  height: 300px;
+  width: 300px;
+  top: 50%;
+  right: -30px;
+  z-index: -1;
+}
+
+.bg-circle-2 {
+  position: fixed;
+  height: 200px;
+  width: 200px;
+  top: 30%;
+  left: -30px;
+  z-index: -1;
+}
+
+.bg-circle-3 {
+  background-color: #f6d727;
+  position: fixed;
+  height: 100px;
+  width: 100px;
+  bottom: 0;
+  left: 20%;
+  z-index: -1;
+}
+
+@media (max-width: 576px) {
+  
+  .bg-circle-1 {
+    height: 150px;
+    width: 150px;
+  }
+  .bg-circle-2 {
+    height: 100px;
+    width: 100px;
+  }
+  .bg-circle-3 {
+    height: 50px;
+    width: 50px;
+  }
+}

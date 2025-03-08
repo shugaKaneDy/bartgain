@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Webcam</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+</head>
+<body>
+  <div id="camera"></div>
+
+  <script>
+    // Function to start webcam stream responsively
+    function startWebcamStream() {
+      // Get the webcam stream to dynamically determine width and height
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          let videoTrack = stream.getVideoTracks()[0];
+          let settings = videoTrack.getSettings();
+
+          // Log the actual camera resolution (width and height)
+          console.log("Camera resolution: " + settings.width + "x" + settings.height);
+
+          // Determine aspect ratio
+          const aspectRatio = settings.width / settings.height;
+
+          // Set responsive webcam settings
+          Webcam.set({
+            width: settings.width,    // Adjust width based on device camera
+            height: settings.height,  // Adjust height based on device camera
+            image_format: 'jpeg',
+            jpeg_quality: 90,
+            flip_horiz: true  // Optional: Flip for front camera mirroring
+          });
+
+          // Attach the webcam stream to the #camera element
+          Webcam.attach('#camera');
+        })
+        .catch(function (error) {
+          console.error("Error accessing the camera: ", error);
+        });
+    }
+
+    // Start the webcam when the page loads
+    window.onload = startWebcamStream;
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Geocoding with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<button id="getLocation">Get My Location</button>
+<pre id="location"></pre> <!-- Using <pre> to display the entire JSON response in a readable format -->
+
+<script>
+$(document).ready(function() {
+    // Event listener for the button click
+    $('#getLocation').on('click', function() {
+        getCurrentLocation();
+    });
+
+    // Function to get the current location
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                handleLocationSuccess,
+                handleLocationError
+            );
+        } else {
+            displayMessage('Geolocation is not supported by this browser.');
+        }
+    }
+
+    // Success callback for geolocation
+    function handleLocationSuccess(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetchLocationDetails(lat, lon);
+    }
+
+    // Error callback for geolocation
+    function handleLocationError(error) {
+        let errorMessage = 'Unable to retrieve your location. ';
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                errorMessage += 'Permission denied.';
+                break;
+            case error.POSITION_UNAVAILABLE:
+                errorMessage += 'Position unavailable.';
+                break;
+            case error.TIMEOUT:
+                errorMessage += 'Request timed out.';
+                break;
+            default:
+                errorMessage += 'An unknown error occurred.';
+        }
+        displayMessage(errorMessage);
+    }
+
+    // Function to make the reverse geocoding API request
+    function fetchLocationDetails(lat, lon) {
+        const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
+
+        $.getJSON(url)
+            .done(function(data) {
+                if (data) {
+                    // Display the entire JSON response
+                    displayMessage(JSON.stringify(data, null, 2)); // Pretty-printing JSON for better readability
+                } else {
+                    displayMessage('Location details not available.');
+                }
+            })
+            .fail(function() {
+                displayMessage('Failed to retrieve location details.');
+            });
+    }
+
+    // Function to display messages in the DOM
+    function displayMessage(message) {
+        $('#location').text(message);
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Routing app</title>
+
+  <!-- leaflet cdn css -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- leaflet routing machine css -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map" style="width: 100%; height: 50vh;"></div>
+  
+  <!-- leaflet cdn -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- leaflet routing js -->
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+  <script>
+
+    // leaflet map with osm titlelayer
+    var map = L.map('map').setView([14.4238702, 120.9199225], 13);
+    var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: "OSM" }).addTo(map);
+
+    // markers with labels (tooltips), fixed and not draggable
+    var startMarker = L.marker([14.4238702, 120.9199225], { draggable: false }).addTo(map).bindTooltip('You', {permanent: true, className: 'start-label'});
+    var middleMarker = L.marker([14.3275, 120.9404], { draggable: false }).addTo(map).bindTooltip('Meet-up', {permanent: true, className: 'middle-label'});
+    var endMarker = L.marker([14.3818752, 120.9073664], { draggable: false }).addTo(map).bindTooltip('Barter Partner', {permanent: true, className: 'end-label'});
+
+    // Routing control with fixed waypoints
+    L.Routing.control({
+      waypoints: [
+        L.latLng(14.4238702, 120.9199225), // start
+        L.latLng(14.3275, 120.9404), // middle
+        L.latLng(14.3818752, 120.9073664)  // end
+      ],
+      draggableWaypoints: false, // Disable dragging of waypoints
+      addWaypoints: false, // Disable adding additional waypoints
+      routeWhileDragging: true // Allow route updating while dragging waypoints
+    }).addTo(map);
+  </script>
+</body>
+</html>
